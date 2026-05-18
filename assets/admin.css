@@ -1,0 +1,142 @@
+/* WP Vigie admin styles — scoped to .wpvigie-wrap */
+
+.wpvigie-wrap {
+	max-width: 800px;
+}
+
+/* --------------------------------------------------------------------------
+   Score circle
+   -------------------------------------------------------------------------- */
+
+.wpvigie-score {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	margin: 24px 0;
+	font-weight: 700;
+}
+
+.wpvigie-score--pass {
+	background: #46b450;
+	color: #fff;
+}
+
+.wpvigie-score--warn {
+	background: #ffb900;
+	color: #1e1e1e;
+}
+
+.wpvigie-score--fail {
+	background: #dc3232;
+	color: #fff;
+}
+
+.wpvigie-score__number {
+	font-size: 40px;
+	line-height: 1;
+}
+
+.wpvigie-score__total {
+	font-size: 13px;
+	opacity: .8;
+}
+
+/* --------------------------------------------------------------------------
+   Check cards
+   -------------------------------------------------------------------------- */
+
+.wpvigie-checks {
+	margin: 0;
+	padding: 0;
+}
+
+.wpvigie-check {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	padding: 12px 16px;
+	margin-bottom: 8px;
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-left-width: 4px;
+	border-radius: 3px;
+}
+
+.wpvigie-check--pass {
+	border-left-color: #46b450;
+}
+
+.wpvigie-check--warn {
+	border-left-color: #ffb900;
+}
+
+.wpvigie-check--fail {
+	border-left-color: #dc3232;
+}
+
+.wpvigie-check__icon {
+	font-size: 20px;
+	line-height: 1.4;
+	flex-shrink: 0;
+	width: 24px;
+	text-align: center;
+}
+
+.wpvigie-check--pass .wpvigie-check__icon {
+	color: #46b450;
+}
+
+.wpvigie-check--warn .wpvigie-check__icon {
+	color: #996800;
+}
+
+.wpvigie-check--fail .wpvigie-check__icon {
+	color: #dc3232;
+}
+
+.wpvigie-check__body {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+
+.wpvigie-check__title {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.wpvigie-check__value {
+	font-size: 13px;
+	color: #50575e;
+}
+
+.wpvigie-check__rec {
+	margin: 4px 0 0;
+	font-size: 13px;
+	color: #3c434a;
+	font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   Misc
+   -------------------------------------------------------------------------- */
+
+#wpvigie-run-scan:disabled {
+	opacity: .7;
+	cursor: wait;
+}
+
+#wpvigie-results {
+	margin-top: 24px;
+}
+
+.wpvigie-footer {
+	margin-top: 32px;
+	color: #646970;
+	font-size: 12px;
+}
