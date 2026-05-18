@@ -1,5 +1,5 @@
 === WP Vigie ===
-Contributors: odacom
+Contributors: Omar EL AMRANI EL IDRISSI - odacom
 Tags: health check, security, maintenance, audit, monitoring
 Requires at least: 6.0
 Tested up to: 6.7
