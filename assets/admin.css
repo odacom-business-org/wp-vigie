@@ -1,142 +1,653 @@
-/* WP Vigie admin styles — scoped to .wpvigie-wrap */
+/* WP Vigie admin — v0.2. All rules scoped to .wpvigie-wrap. */
+
+/* ==========================================================================
+   1. Design Tokens
+   ========================================================================== */
 
 .wpvigie-wrap {
-	max-width: 800px;
+	--wpv-primary:       #2563eb;
+	--wpv-primary-dark:  #1d4ed8;
+	--wpv-primary-light: #dbeafe;
+
+	--wpv-success:        #10b981;
+	--wpv-success-accent: #059669;
+	--wpv-success-bg:     #ecfdf5;
+	--wpv-warning:    #f59e0b;
+	--wpv-warning-bg: #fffbeb;
+	--wpv-danger:     #ef4444;
+	--wpv-danger-bg:  #fef2f2;
+
+	--wpv-surface:       #ffffff;
+	--wpv-bg:            #f8fafc;
+	--wpv-bg-subtle:     #f1f5f9;
+	--wpv-border:        #e2e8f0;
+	--wpv-border-strong: #cbd5e1;
+
+	--wpv-text:        #0f172a;
+	--wpv-text-muted:  #64748b;
+	--wpv-text-subtle: #94a3b8;
+
+	--wpv-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+	--wpv-shadow:    0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+
+	--wpv-radius-sm: 6px;
+	--wpv-radius:    10px;
+	--wpv-radius-lg: 16px;
+
+	font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+	             "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.5;
+	color: var(--wpv-text);
+	max-width: 1100px;
 }
 
-/* --------------------------------------------------------------------------
-   Score circle
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   2. Page Header
+   ========================================================================== */
 
-.wpvigie-score {
-	display: inline-flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 120px;
-	height: 120px;
-	border-radius: 50%;
-	margin: 24px 0;
+.wpvigie-header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 16px;
+	margin: 20px 0 0;
+	flex-wrap: wrap;
+}
+
+.wpvigie-header h1 {
+	font-size: 28px;
 	font-weight: 700;
-}
-
-.wpvigie-score--pass {
-	background: #46b450;
-	color: #fff;
-}
-
-.wpvigie-score--warn {
-	background: #ffb900;
-	color: #1e1e1e;
-}
-
-.wpvigie-score--fail {
-	background: #dc3232;
-	color: #fff;
-}
-
-.wpvigie-score__number {
-	font-size: 40px;
-	line-height: 1;
-}
-
-.wpvigie-score__total {
-	font-size: 13px;
-	opacity: .8;
-}
-
-/* --------------------------------------------------------------------------
-   Check cards
-   -------------------------------------------------------------------------- */
-
-.wpvigie-checks {
-	margin: 0;
+	line-height: 1.2;
+	color: var(--wpv-text);
+	margin: 0 0 4px;
 	padding: 0;
 }
 
-.wpvigie-check {
+.wpvigie-header__sub {
+	font-size: 14px;
+	color: var(--wpv-text-muted);
+	margin: 0;
+}
+
+/* ==========================================================================
+   3. Tabs
+   ========================================================================== */
+
+.wpvigie-tabs {
 	display: flex;
-	align-items: flex-start;
-	gap: 12px;
-	padding: 12px 16px;
-	margin-bottom: 8px;
-	background: #fff;
-	border: 1px solid #dcdcde;
-	border-left-width: 4px;
-	border-radius: 3px;
+	border-bottom: 2px solid var(--wpv-border);
+	margin: 24px 0 0;
 }
 
-.wpvigie-check--pass {
-	border-left-color: #46b450;
+.wpvigie-tabs [role="tab"] {
+	background: none;
+	border: none;
+	border-bottom: 2px solid transparent;
+	margin-bottom: -2px;
+	padding: 10px 20px;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--wpv-text-muted);
+	cursor: pointer;
+	transition: color 0.2s ease;
 }
 
-.wpvigie-check--warn {
-	border-left-color: #ffb900;
+.wpvigie-tabs [role="tab"]:hover {
+	color: var(--wpv-text);
 }
 
-.wpvigie-check--fail {
-	border-left-color: #dc3232;
+.wpvigie-tabs [role="tab"][aria-selected="true"] {
+	color: var(--wpv-primary);
+	border-bottom-color: var(--wpv-primary);
 }
 
-.wpvigie-check__icon {
-	font-size: 20px;
-	line-height: 1.4;
+.wpvigie-tabs [role="tab"]:focus-visible {
+	outline: 2px solid var(--wpv-primary);
+	outline-offset: 2px;
+	border-radius: 4px 4px 0 0;
+}
+
+.wpvigie-tab-panel {
+	padding: 32px 0 0;
+}
+
+.wpvigie-tab-panel[hidden] {
+	display: none;
+}
+
+/* ==========================================================================
+   4. Button
+   ========================================================================== */
+
+.wpvigie-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	background: var(--wpv-primary);
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	border-radius: var(--wpv-radius-sm);
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 1;
+	cursor: pointer;
+	box-shadow: var(--wpv-shadow-sm);
+	transition: background 0.15s ease-out, transform 0.15s ease-out, box-shadow 0.15s ease-out;
+	white-space: nowrap;
+}
+
+.wpvigie-btn:hover {
+	background: var(--wpv-primary-dark);
+	transform: translateY(-1px);
+	box-shadow: var(--wpv-shadow);
+}
+
+.wpvigie-btn:active {
+	transform: translateY(0);
+}
+
+.wpvigie-btn:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	transform: none;
+}
+
+.wpvigie-btn:focus-visible {
+	outline: 2px solid var(--wpv-primary);
+	outline-offset: 2px;
+}
+
+.wpvigie-btn--loading {
+	pointer-events: none;
+	position: relative;
+}
+
+.wpvigie-btn--loading::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	border: 2px solid var(--wpv-primary-light);
+	animation: wpv-pulse 1.5s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   5. Score Ring
+   ========================================================================== */
+
+.wpvigie-score-wrap {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 32px;
+	margin: 0 0 40px;
+	flex-wrap: wrap;
+}
+
+.wpvigie-score {
+	position: relative;
+	width: 160px;
+	height: 160px;
 	flex-shrink: 0;
-	width: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: radial-gradient(circle at center, var(--wpv-primary-light) 0%, transparent 65%);
+	border-radius: 50%;
+}
+
+.wpvigie-score__ring {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+.wpvigie-score__center {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	line-height: 1;
+}
+
+.wpvigie-score__number {
+	font-size: 52px;
+	font-weight: 700;
+	line-height: 1;
+	color: var(--wpv-text);
+	font-variant-numeric: tabular-nums;
+	min-width: 3ch;
 	text-align: center;
 }
 
-.wpvigie-check--pass .wpvigie-check__icon {
-	color: #46b450;
+.wpvigie-score__label {
+	font-size: 13px;
+	color: var(--wpv-text-muted);
+	margin-top: 4px;
 }
 
-.wpvigie-check--warn .wpvigie-check__icon {
-	color: #996800;
-}
-
-.wpvigie-check--fail .wpvigie-check__icon {
-	color: #dc3232;
-}
-
-.wpvigie-check__body {
-	flex: 1;
+.wpvigie-score__meta {
 	display: flex;
 	flex-direction: column;
-	gap: 3px;
+	gap: 8px;
+	max-width: 260px;
 }
 
-.wpvigie-check__title {
+.wpvigie-score__status {
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 1.3;
+	color: var(--wpv-text);
+}
+
+.wpvigie-score__status--pass { color: var(--wpv-success); }
+.wpvigie-score__status--warn { color: var(--wpv-warning); }
+.wpvigie-score__status--fail { color: var(--wpv-danger); }
+
+.wpvigie-score__time {
+	font-size: 13px;
+	color: var(--wpv-text-muted);
+}
+
+/* ==========================================================================
+   6. Cards Grid
+   ========================================================================== */
+
+.wpvigie-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 16px;
+	margin: 0 0 48px;
+}
+
+.wpvigie-card {
+	background: var(--wpv-surface);
+	border: 1px solid var(--wpv-border);
+	border-radius: var(--wpv-radius);
+	padding: 16px;
+	box-shadow: var(--wpv-shadow-sm);
+	position: relative;
+	overflow: hidden;
+	transition: box-shadow 0.15s ease-out, transform 0.15s ease-out;
+	opacity: 0;
+	transform: translateY(12px);
+	animation: wpv-card-in 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Top severity bar */
+.wpvigie-card::before {
+	content: '';
+	position: absolute;
+	top: 0; left: 0; right: 0;
+	height: 3px;
+	background: linear-gradient(
+		90deg,
+		var(--wpv-card-accent, var(--wpv-border)) 0%,
+		var(--wpv-card-accent, var(--wpv-border)) 60%,
+		transparent 100%
+	);
+}
+
+.wpvigie-card:hover {
+	box-shadow: var(--wpv-shadow);
+	transform: translateY(-2px);
+}
+
+.wpvigie-card--pass { --wpv-card-accent: var(--wpv-success-accent); }
+.wpvigie-card--warn { --wpv-card-accent: var(--wpv-warning); }
+.wpvigie-card--fail { --wpv-card-accent: var(--wpv-danger); }
+
+/* Stagger delays */
+.wpvigie-card:nth-child(1)  { animation-delay:   0ms; }
+.wpvigie-card:nth-child(2)  { animation-delay:  60ms; }
+.wpvigie-card:nth-child(3)  { animation-delay: 120ms; }
+.wpvigie-card:nth-child(4)  { animation-delay: 180ms; }
+.wpvigie-card:nth-child(5)  { animation-delay: 240ms; }
+.wpvigie-card:nth-child(6)  { animation-delay: 300ms; }
+.wpvigie-card:nth-child(7)  { animation-delay: 360ms; }
+.wpvigie-card:nth-child(8)  { animation-delay: 420ms; }
+.wpvigie-card:nth-child(9)  { animation-delay: 480ms; }
+.wpvigie-card:nth-child(10) { animation-delay: 540ms; }
+
+.wpvigie-card__head {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 8px;
+}
+
+.wpvigie-card__icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	font-size: 13px;
+	font-weight: 700;
+	flex-shrink: 0;
+}
+
+.wpvigie-card--pass .wpvigie-card__icon { background: var(--wpv-success-bg); color: var(--wpv-success); }
+.wpvigie-card--warn .wpvigie-card__icon { background: var(--wpv-warning-bg); color: var(--wpv-warning); }
+.wpvigie-card--fail .wpvigie-card__icon { background: var(--wpv-danger-bg);  color: var(--wpv-danger);  }
+
+.wpvigie-card__title {
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--wpv-text);
+	margin: 0;
+}
+
+.wpvigie-card__value {
 	font-size: 14px;
+	font-weight: 500;
+	color: var(--wpv-text-muted);
+	font-variant-numeric: tabular-nums;
+}
+
+.wpvigie-card__rec {
+	font-size: 13px;
+	color: var(--wpv-text-muted);
+	margin: 6px 0 0;
+	line-height: 1.5;
+}
+
+/* ==========================================================================
+   7. Section title
+   ========================================================================== */
+
+.wpvigie-section-title {
+	font-size: 20px;
+	font-weight: 600;
+	color: var(--wpv-text);
+	margin: 0 0 20px;
+}
+
+/* ==========================================================================
+   8. History
+   ========================================================================== */
+
+.wpvigie-history { margin: 0 0 48px; }
+
+.wpvigie-chart-wrap {
+	background: var(--wpv-surface);
+	border: 1px solid var(--wpv-border);
+	border-radius: var(--wpv-radius);
+	padding: 20px;
+	margin-bottom: 20px;
+	box-shadow: var(--wpv-shadow-sm);
+	position: relative;
+}
+
+.wpvigie-chart {
+	width: 100%;
+	height: 200px;
+	display: block;
+	overflow: visible;
+}
+
+.wpvigie-chart-tooltip {
+	display: none;
+	position: absolute;
+	background: #0f172a;
+	color: #fff;
+	padding: 4px 10px;
+	border-radius: var(--wpv-radius-sm);
+	font-size: 12px;
+	font-weight: 500;
+	pointer-events: none;
+	white-space: nowrap;
+	z-index: 10;
+}
+
+.wpvigie-table-wrap {
+	background: var(--wpv-surface);
+	border: 1px solid var(--wpv-border);
+	border-radius: var(--wpv-radius);
+	overflow: hidden;
+	box-shadow: var(--wpv-shadow-sm);
+}
+
+.wpvigie-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 14px;
+}
+
+.wpvigie-table th {
+	padding: 10px 16px;
+	text-align: left;
+	font-size: 11px;
+	font-weight: 600;
+	color: var(--wpv-text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	background: var(--wpv-bg-subtle);
+	border-bottom: 1px solid var(--wpv-border);
+}
+
+.wpvigie-table td {
+	padding: 12px 16px;
+	color: var(--wpv-text);
+	border-bottom: 1px solid var(--wpv-border);
+	font-variant-numeric: tabular-nums;
+}
+
+.wpvigie-table tr:last-child td { border-bottom: none; }
+.wpvigie-table tbody tr:hover td { background: var(--wpv-bg); }
+
+.wpvigie-score-badge {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 38px;
+	padding: 3px 8px;
+	border-radius: var(--wpv-radius-sm);
+	font-weight: 600;
+	font-size: 13px;
+}
+
+.wpvigie-score-badge--pass { background: var(--wpv-success-bg); color: var(--wpv-success); }
+.wpvigie-score-badge--warn { background: var(--wpv-warning-bg); color: var(--wpv-warning); }
+.wpvigie-score-badge--fail { background: var(--wpv-danger-bg);  color: var(--wpv-danger);  }
+
+.wpvigie-trigger-badge {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 100px;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.wpvigie-trigger-badge--manual    { background: var(--wpv-bg-subtle); color: var(--wpv-text-muted); }
+.wpvigie-trigger-badge--scheduled { background: var(--wpv-primary-light); color: var(--wpv-primary); }
+
+.wpvigie-history-row--hidden { display: none; }
+
+.wpvigie-table-footer {
+	padding: 12px 16px;
+	background: var(--wpv-bg-subtle);
+	border-top: 1px solid var(--wpv-border);
+	text-align: center;
+}
+
+.wpvigie-show-all-btn {
+	background: none;
+	border: none;
+	color: var(--wpv-primary);
+	font-size: 13px;
+	font-weight: 500;
+	cursor: pointer;
+	padding: 0;
+}
+
+.wpvigie-show-all-btn:hover { text-decoration: underline; }
+
+.wpvigie-view-btn {
+	display: inline-block;
+	border: 1px solid var(--wpv-border);
+	padding: 4px 10px;
+	border-radius: var(--wpv-radius-sm);
+	background: transparent;
+	color: var(--wpv-text-muted);
+	font-size: 13px;
+	font-weight: 500;
+	text-decoration: none;
+	cursor: pointer;
+	transition: background 0.15s;
+}
+
+.wpvigie-view-btn:hover {
+	background: var(--wpv-bg-subtle);
+	text-decoration: none;
+}
+
+.wpvigie-empty {
+	text-align: center;
+	padding: 40px 20px;
+	color: var(--wpv-text-muted);
+}
+
+/* ==========================================================================
+   9. Settings Tab
+   ========================================================================== */
+
+.wpvigie-settings { max-width: 560px; }
+
+.wpvigie-settings-card {
+	background: var(--wpv-surface);
+	border: 1px solid var(--wpv-border);
+	border-radius: var(--wpv-radius);
+	padding: 24px;
+	margin-bottom: 20px;
+	box-shadow: var(--wpv-shadow-sm);
+}
+
+.wpvigie-settings-card h3 {
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--wpv-text);
+	margin: 0 0 20px;
+}
+
+.wpvigie-field { margin-bottom: 20px; }
+.wpvigie-field:last-child { margin-bottom: 0; }
+
+.wpvigie-field label {
+	display: block;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--wpv-text);
+	margin-bottom: 6px;
+}
+
+.wpvigie-field__desc {
+	font-size: 13px;
+	color: var(--wpv-text-muted);
+	margin: 4px 0 0;
+}
+
+.wpvigie-field input[type="number"],
+.wpvigie-field select {
+	border: 1px solid var(--wpv-border-strong);
+	border-radius: var(--wpv-radius-sm);
+	padding: 8px 12px;
+	font-size: 14px;
+	color: var(--wpv-text);
+	background: var(--wpv-surface);
+	min-width: 120px;
+	transition: border-color 0.15s;
+}
+
+.wpvigie-field input[type="number"]:focus,
+.wpvigie-field select:focus {
+	border-color: var(--wpv-primary);
+	outline: none;
+	box-shadow: 0 0 0 3px var(--wpv-primary-light);
+}
+
+.wpvigie-toggle {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
 	font-weight: 600;
 }
 
-.wpvigie-check__value {
+.wpvigie-toggle input[type="checkbox"] {
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+	accent-color: var(--wpv-primary);
+}
+
+.wpvigie-settings-actions {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	margin-top: 8px;
+}
+
+.wpvigie-settings-msg {
 	font-size: 13px;
-	color: #50575e;
+	color: var(--wpv-success);
+	font-weight: 500;
+	opacity: 0;
+	transition: opacity 0.3s;
 }
 
-.wpvigie-check__rec {
-	margin: 4px 0 0;
-	font-size: 13px;
-	color: #3c434a;
-	font-style: italic;
-}
+.wpvigie-settings-msg.is-visible { opacity: 1; }
 
-/* --------------------------------------------------------------------------
-   Misc
-   -------------------------------------------------------------------------- */
-
-#wpvigie-run-scan:disabled {
-	opacity: .7;
-	cursor: wait;
-}
-
-#wpvigie-results {
-	margin-top: 24px;
-}
+/* ==========================================================================
+   10. Footer
+   ========================================================================== */
 
 .wpvigie-footer {
-	margin-top: 32px;
-	color: #646970;
-	font-size: 12px;
+	margin-top: 40px;
+	padding-top: 20px;
+	border-top: 1px solid var(--wpv-border);
+	color: var(--wpv-text-subtle);
+	font-size: 13px;
+}
+
+.wpvigie-footer a {
+	color: var(--wpv-text-muted);
+	text-decoration: none;
+}
+
+.wpvigie-footer a:hover {
+	color: var(--wpv-primary);
+	text-decoration: underline;
+}
+
+/* ==========================================================================
+   11. Keyframes
+   ========================================================================== */
+
+@keyframes wpv-card-in {
+	to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes wpv-pulse {
+	0%, 100% { transform: scale(1);     opacity: 0; }
+	50%       { transform: scale(1.05); opacity: 1; }
+}
+
+/* ==========================================================================
+   12. Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+	.wpvigie-wrap *,
+	.wpvigie-wrap *::before,
+	.wpvigie-wrap *::after {
+		animation-duration:  0.01ms !important;
+		transition-duration: 0.01ms !important;
+	}
 }
